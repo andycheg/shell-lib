@@ -1,0 +1,21 @@
+function hubfetch()
+{
+	LOGIN=$1
+	REPO=$2
+	wget -q https://github.com/$LOGIN/$REPO/tarball/master
+	mkdir $REPO
+	tar --strip-components 1 -xzf master -C $REPO
+	rm -r master
+}
+
+function ghclone()
+{
+	LOGIN=$1
+	REPO=$2
+	if [ -z "$3" ]; then
+		OUTPATH=./
+	else
+		OUTPATH=$3
+	fi
+	git clone https://github.com/$LOGIN/$REPO $OUTPATH
+}

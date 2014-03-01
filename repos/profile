@@ -1,0 +1,43 @@
+# vi: set ft=sh:
+RSYNC_REPO_FETCHER='rsync -avSHP --delete --exclude=/debug/ --exclude=*.i686.rpm --delete-excluded'
+PHP_REPO_FETCHER='php /Users/andy/Development/PHP/oracle-repo-fetcher/run.php'
+
+function repo_sync ()
+{
+	for repo in os updates extras centosplus
+	do
+		$RSYNC_REPO_FETCHER rsync://mirror.yandex.ru/centos/6.5/$repo/x86_64 /Users/andy/Repos/centos-6.5/$repo/
+	done
+}
+
+
+function epel_sync ()
+{
+	$RSYNC_REPO_FETCHER rsync://mirror.yandex.ru/fedora-epel/6Server/x86_64/ /Users/andy/Repos/centos-6.5/epel
+}
+
+function oracle_sync ()
+{
+	$PHP_REPO_FETCHER http://public-yum.oracle.com/repo/OracleLinux/OL6/latest/x86_64/ /Users/andy/Repos/oracle-6/base/
+	$PHP_REPO_FETCHER http://public-yum.oracle.com/repo/OracleLinux/OL6/UEKR3/latest/x86_64/ /Users/andy/Repos/oracle-6/uekr3/
+}
+
+function tungsten_sync ()
+{
+	$PHP_REPO_FETCHER http://yum.tungsten-replicator.org/ /Users/andy/Repos/tungsten/
+}
+
+function remi_sync ()
+{
+	$PHP_REPO_FETCHER http://rpms.famillecollet.com/enterprise/6/remi/x86_64/ /Users/andy/Repos/centos-6.5/remi/
+}
+
+function mariadb_sync ()
+{
+	$PHP_REPO_FETCHER http://yum.mariadb.org/5.5/centos6-amd64 /Users/andy/Repos/centos-6.5/mariadb/
+}
+
+function sync_all ()
+{
+	repo_sync; epel_sync; oracle_sync ; tungsten_sync ; remi_sync ; mariadb_sync ;
+}
