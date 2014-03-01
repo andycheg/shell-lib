@@ -1,0 +1,35 @@
+# vi: set ft=sh:
+function check_git ()
+{
+	STATUS=`git status 2>&1`
+	if  echo $STATUS | grep 'Not a git repository' > /dev/null; then
+		export __git=0
+		export __git_branch=""
+		export __git_dirty=0
+	else
+		export __git=1
+		
+		export __git_branch=`echo $STATUS | grep 'On branch' | sed 's/# On branch \([^ ]*\).*/\1/'`
+		if echo $STATUS | grep 'nothing to commit' > /dev/null; then
+			export __git_dirty=0
+		else
+			export __git_dirty=1
+		fi
+	fi
+
+	if [ $__git_dirty = 0 ]; then
+		color="\[\e[0;96m\]"
+	else
+		color="\[\e[0;91m\]"
+	fi
+
+	if [ $__git = 0 ]; then
+		export __git_prompt="\[\e[0;93m\]\u"
+	else
+		export __git_prompt="$color($__git_branch) "
+	fi
+
+	export PS1="\[\e[0;34m\][MBP] $__git_prompt\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
+}
+
+PROMPT_COMMAND="$PROMPT_COMMAND check_git;"
