@@ -1,4 +1,7 @@
-# vi: set ft=sh:
+# vi: set ft=sh: 
+# vi: set fdm=marker:
+
+# check_git {{{
 function check_git ()
 {
 	STATUS=`git status 2>&1`
@@ -31,5 +34,54 @@ function check_git ()
 
 	export PS1="\[\e[0;34m\][MBP] $__git_prompt\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
 }
+# }}}
+
+# gph {{{ 
+function gph ()
+{
+	remote=$1
+
+	if [ -z "$remote" ]; then
+		echo "Using: gph <remote-name>"
+		return
+	fi
+
+	if [ $__git != "1" ]; then
+		echo "Not in git repository"
+		return
+	fi
+
+	if [ -z "$__git_branch" ]; then
+		echo "Cannot determine current branch"
+		return
+	fi
+	
+	git push $remote $__git_branch
+}
+# }}}
+
+# gpl {{{ 
+function gpl ()
+{
+	remote=$1
+
+	if [ -z "$remote" ]; then
+		echo "Using: gph <remote-name>"
+		return
+	fi
+
+	if [ $__git != "1" ]; then
+		echo "Not in git repository"
+		return
+	fi
+
+	if [ -z "$__git_branch" ]; then
+		echo "Cannot determine current branch"
+		return
+	fi
+	
+	git pull $remote $__git_branch
+}
+# }}}
 
 PROMPT_COMMAND="$PROMPT_COMMAND check_git;"
