@@ -4,16 +4,17 @@
 # check_git {{{
 function check_git ()
 {
-	STATUS=`git status 2>&1`
-	if  echo $STATUS | grep 'Not a git repository' > /dev/null; then
+	STATUS=`git status --porcelain -b 2>&1`
+	if  echo "$STATUS" | grep 'Not a git repository' > /dev/null; then
 		export __git=0
 		export __git_branch=""
 		export __git_dirty=0
 	else
 		export __git=1
 		
-		export __git_branch=`echo $STATUS | grep 'On branch' | sed 's/# On branch \([^ ]*\).*/\1/'`
-		if echo $STATUS | grep 'nothing to commit' > /dev/null; then
+		export __git_branch=`echo "$STATUS" | head -n 1 | sed 's/\.\..*//' | sed 's/## \([^ ]*\).*/\1/'`
+		modified=`echo "$STATUS" | grep -vE ^##`
+		if [ -z "$modified" ]; then
 			export __git_dirty=0
 		else
 			export __git_dirty=1
@@ -31,8 +32,11 @@ function check_git ()
 	else
 		export __git_prompt="$color($__git_branch) "
 	fi
-
-	export PS1="\[\e[0;34m\][MBP] $__git_prompt\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
+	
+	if [ -n "$HOSTALIAS" ]; then
+		host="\[\e[0;34m\][$HOSTALIAS] "
+	fi
+	export PS1="$host$__git_prompt\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
 }
 # }}}
 
