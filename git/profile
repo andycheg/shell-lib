@@ -70,7 +70,7 @@ function gpl ()
 	remote=$1
 
 	if [ -z "$remote" ]; then
-		echo "Using: gph <remote-name>"
+		echo "Using: gpl <remote-name>"
 		return
 	fi
 
@@ -85,6 +85,25 @@ function gpl ()
 	fi
 	
 	git pull $remote $__git_branch
+}
+# }}}
+
+# gb {{{ 
+function gb ()
+{
+	branch=$1
+
+	if [ -z "$branch" ]; then
+		echo "Using: gp <branch-name>"
+		return
+	fi
+
+	if [ $__git != "1" ]; then
+		echo "Not in git repository"
+		return
+	fi
+
+	git checkout $branch
 }
 # }}}
 
