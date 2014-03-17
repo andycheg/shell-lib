@@ -4,6 +4,10 @@
 # check_git {{{
 function check_git ()
 {
+	if [ -n "$GIT_PROMPT_DISABLED" ]; then
+		return
+	fi
+
 	STATUS=`git status --porcelain -b 2>&1`
 	if  echo "$STATUS" | grep 'Not a git repository' > /dev/null; then
 		export __git=0
@@ -104,6 +108,30 @@ function gb ()
 	fi
 
 	git checkout $branch
+}
+# }}}
+
+# gdisable {{{ 
+function gdisable ()
+{
+	export GIT_PROMPT_DISABLED=1
+	export __git=0
+	export __git_branch=""
+	export __git_dirty=0
+	export __git_prompt="\[\e[0;93m\]\u"
+	
+	if [ -n "$HOSTALIAS" ]; then
+		host="\[\e[0;34m\][$HOSTALIAS] "
+	fi
+
+	export PS1="$host$__git_prompt\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
+}
+# }}}
+
+# genable {{{ 
+function genable ()
+{
+	unset GIT_PROMPT_DISABLED
 }
 # }}}
 
