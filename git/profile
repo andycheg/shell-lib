@@ -88,7 +88,7 @@ function gpl ()
 		return
 	fi
 	
-	git pull $remote $__git_branch
+	git pull --ff-only $remote $__git_branch
 }
 # }}}
 
