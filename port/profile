@@ -1,1 +1,2 @@
+alias port='sudo port'
 . $SHELL_LIB/port/complete.sh
