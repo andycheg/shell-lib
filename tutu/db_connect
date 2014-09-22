@@ -31,3 +31,25 @@ function __get_dbc_parameter()
 	__result=`grep -E '^'$PARAM'[   =]' $FILE | sed 's/[ 	]//g' | awk -F '=' ' { print $2; } '`
 	echo "$__result"
 }
+
+_dbc_complete()
+{
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+	if [ ! -d $SHELL_LIB ]; then
+		return 0
+	fi
+
+	CONNECTS=`ls -1 /w/etc/database | xargs`
+
+
+    if [ ${COMP_CWORD} == 1 ] ; then # цикл определения автодополнения при вводе подкоманды первого уровня
+        COMPREPLY=( $(compgen -W "${CONNECTS}" -- ${cur}) )
+        return 0
+    fi
+
+    return 0
+}
+
+complete -F _dbc_complete dbc
