@@ -111,6 +111,13 @@ function gb ()
 }
 # }}}
 
+# gbm {{{ 
+function gbm ()
+{
+	gb master
+}
+# }}}
+
 # gdisable {{{ 
 function gdisable ()
 {
