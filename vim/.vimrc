@@ -40,6 +40,7 @@ highlight Search cterm=underline
 set hlsearch
 set noshowmode
 set showtabline=2
+set backspace=2
 nmap <C-n> :tabnew<cr>
 nmap <C-]> :tabnext<cr>
 "nmap <C-[> :tabprevious<cr>
