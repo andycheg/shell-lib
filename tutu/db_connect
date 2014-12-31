@@ -23,6 +23,31 @@ function dbc ()
 	mysql -h $HOST -u $USER -p$PASS -P $PORT $DB $@
 }
 
+function dtable ()
+{
+	CONNECT=$1
+	if [ -z "$CONNECT" ]; then
+		echo "USAGE: dbc <connect-name> <table>"
+		return
+	fi;
+
+	FILE=/w/etc/database/$1
+	
+	if [ ! -f $FILE ]; then
+		echo "No connection with name $CONNECT"
+		return
+	fi
+
+	HOST=$(__get_dbc_parameter $FILE 'host')
+	USER=$(__get_dbc_parameter $FILE 'user')
+	PASS=$(__get_dbc_parameter $FILE 'password')
+	PORT=$(__get_dbc_parameter $FILE 'port')
+	DB=$(__get_dbc_parameter $FILE 'database')
+
+	shift
+	mysqldump -h $HOST -u $USER -p$PASS -P $PORT $DB $@
+}
+
 function __get_dbc_parameter()
 {
 	local __result=''
