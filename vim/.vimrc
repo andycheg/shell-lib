@@ -24,7 +24,9 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
-set colorcolumn=120
+if v:version >= 703
+	set colorcolumn=120
+endif
 set modeline
 set modelines=20
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
