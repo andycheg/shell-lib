@@ -1,9 +1,9 @@
 if has('vim_starting')
 	set nocompatible               " Be iMproved
-	set runtimepath+=/Users/andy/.vim/bundle/neobundle.vim/
-	set rtp+=/Users/andy/Library/Python/3.3/lib/python/site-packages/powerline/bindings/vim/
+	set runtimepath+=~/.vim/bundle/neobundle.vim/
+	set rtp+=~/Library/Python/3.3/lib/python/site-packages/powerline/bindings/vim/
 endif
-call neobundle#begin(expand('/Users/andy/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
@@ -29,6 +29,7 @@ set modeline
 set modelines=20
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType xml imap <C-f> <Return><Backspace></<C-X><C-O>
+autocmd FileType html imap <C-f> <Return><Backspace></<C-X><C-O>
 nmap <C-b> :NERDTreeTabsToggle<cr>
 set showmode
 set backupdir=~/.vim/backup//
