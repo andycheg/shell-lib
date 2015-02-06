@@ -40,6 +40,10 @@ set number
 set laststatus=2
 set encoding=utf-8
 highlight Search cterm=underline
+highlight NonText ctermfg=Grey
+highlight SpecialKey ctermfg=Grey
+set listchars=eol:¬,tab:▸-,trail:.,extends:>,precedes:<
+set list
 set hlsearch
 set noshowmode
 set showtabline=2
