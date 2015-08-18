@@ -1,1 +1,2 @@
 . $SHELL_LIB/tutu/db_connect
+. $SHELL_LIB/tutu/hosts
