@@ -11,6 +11,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'lokaltog/powerline'
 NeoBundle 'xoria256.vim'
 NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'kien/ctrlp.vim'
 
 call neobundle#end()
 
@@ -54,3 +55,9 @@ nmap <C-]> :tabnext<cr>
 "
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
+
+" Replace default CtrlP opening to tabs
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
