@@ -8,7 +8,7 @@ function check_git ()
 		return
 	fi
 
-	STATUS=`git status --porcelain -b 2>&1`
+	STATUS=`LC_ALL=en_US.UTF-8 git status --porcelain -b 2>&1`
 	if  echo "$STATUS" | grep 'Not a git repository' > /dev/null; then
 		export __git=0
 		export __git_branch=""
