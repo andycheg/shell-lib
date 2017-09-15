@@ -1,0 +1,2 @@
+alias sec='test -d ${HOME}/SecretDisk || mkdir ${HOME}/SecretDisk; hdiutil attach ${HOME}/SecretDisk.dmg -mountpoint ${HOME}/SecretDisk; cd ${HOME}/SecretDisk'
+alias unsec='cd ${HOME}; hdiutil detach ${HOME}/SecretDisk'
