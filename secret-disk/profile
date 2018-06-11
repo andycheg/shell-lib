@@ -1,2 +1,2 @@
-alias sec='test -d ${HOME}/SecretDisk || mkdir ${HOME}/SecretDisk; hdiutil attach ${HOME}/SecretDisk.dmg -mountpoint ${HOME}/SecretDisk; cd ${HOME}/SecretDisk'
+alias sec='test -f ${HOME}/SecretDisk.dmg || hdiutil create -encryption AES-256 -volname SecDisk -nospotlight -type UDIF -fs "Case-sensitive APFS" -stdinpass -size 128M -layout NONE SecretDisk.dmg; test -d ${HOME}/SecretDisk || mkdir ${HOME}/SecretDisk; hdiutil attach ${HOME}/SecretDisk.dmg -mountpoint ${HOME}/SecretDisk; cd ${HOME}/SecretDisk'
 alias unsec='cd ${HOME}; hdiutil detach ${HOME}/SecretDisk'
