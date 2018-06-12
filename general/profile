@@ -5,5 +5,6 @@ alias vlc="open -b org.videolan.vlc"
 alias vun="vim"
 alias cgp="mv *.gpx ~/GuitarPro/; mv *.gp3 ~/GuitarPro/;mv *.gp5 ~/GuitarPro/; mv *.gp4 ~/GuitarPro/; mv *.gtp ~/GuitarPro/;"
 alias minik="ssh chegod.selfip.org"
+alias sssh='ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"'
 
 function itunes() { mv "$@" /Users/andy/Music/iTunes/iTunes\ Media/Automatically\ Add\ to\ iTunes.localized/; }
