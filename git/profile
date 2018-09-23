@@ -142,5 +142,5 @@ function genable ()
 }
 # }}}
 
-PROMPT_COMMAND="$PROMPT_COMMAND check_git;"
+PROMPT_COMMAND="$PROMPT_COMMAND ; check_git;"
 . $SHELL_LIB/git/complete.sh
