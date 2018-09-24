@@ -1,4 +1,4 @@
 # vi: set ft=sh:
 export TITLE=TAB
-export PROMPT_COMMAND="$PROMPT_COMMAND $SHELL_LIB/title/gettitle;"
+export PROMPT_COMMAND="$PROMPT_COMMAND ; $SHELL_LIB/title/gettitle"
 function title() { export TITLE="$@"; }
