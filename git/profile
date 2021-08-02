@@ -32,7 +32,7 @@ function check_git ()
 	fi
 
 	if [ $__git = 0 ]; then
-		export __git_prompt="\[\e[0;93m\]\u"
+		export __git_prompt=""
 	else
 		export __git_prompt="$color($__git_branch) "
 	fi
@@ -40,7 +40,7 @@ function check_git ()
 	if [ -n "$HOSTALIAS" ]; then
 		host="\[\e[0;34m\][$HOSTALIAS] "
 	fi
-	export PS1="$host$__git_prompt\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
+	export PS1="$host$__git_prompt\[\e[0;93m\]\u\[\e[0;93m\]:\[\e[0;92m\]\W \[\e[1;34m\]\$\[\e[0m\] "
 }
 # }}}
 
@@ -142,6 +142,8 @@ function genable ()
 }
 # }}}
 
-PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'check_git'
+if ! echo "$PROMPT_COMMAND" | grep 'check_git' > /dev/null; then
+  PROMPT_COMMAND=${PROMPT_COMMAND:+"$PROMPT_COMMAND; "}'check_git'
+fi
 
 . $SHELL_LIB/git/complete.sh
