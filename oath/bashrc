@@ -1,5 +1,7 @@
 # vi: set ft=sh:
 
+# To set token please use `security add-generic-password -s 'CLI Test'  -a 'armin' -w 'password123'`
+
 function otp2clipboard {
   key=$1
   if ! tuv_token=$(security find-generic-password -w -s "$key" -a "$key"); then
