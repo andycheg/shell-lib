@@ -1,0 +1,21 @@
+# vi: set ft=sh:
+
+function otp2clipboard {
+  key=$1
+  if ! tuv_token=$(security find-generic-password -w -s "$key" -a "$key"); then
+    echo "Could not get token, error $?"
+    return 1
+  fi
+
+  if ! oathtool=$(which oathtool); then
+    echo "Could not find oathtool, consider installing oath-toolkit (brew install oath-toolkit)"
+    return 2
+  fi
+
+  if ! otp=$($oathtool --totp "$tuv_token"); then
+    echo "Could not generate OTP, error $?"
+    return 3
+  fi
+
+  echo -n "$otp" | pbcopy
+}
