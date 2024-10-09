@@ -25,5 +25,7 @@
 	di = diff
 	ci = commit
 	rev = checkout -- 
+[includeIf "gitdir:~/Development/tutu.ru/**"]
+    path = ~/.gitconfig.work
 [credential]
 	helper = osxkeychain
